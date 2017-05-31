@@ -11,7 +11,7 @@
         </div>
       </div>
       <p @click="showText(i)" class="summary">{{ todo.summary }} </p>
-      <p>submitted at: {{ todo.time }}</p>
+      <p class="time-submitted">submitted {{ relTime(todo.date) }}</p>
       <hr>
     </div>
     <input type="text" v-model="newTitle" placeholder="Add a new todo">
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import moment from 'moment'
+
   export default {
     data() {
       return {
@@ -44,6 +46,9 @@
       },
       showText(i) {
         this.$store.commit('showText', i)
+      },
+      relTime(subTime) {
+        return moment(subTime).fromNow();
       }
     }
   }
@@ -73,5 +78,9 @@ p {
   color: #42b983;
   text-decoration: underline;
   text-align: justify;
+}
+
+.time-submitted {
+  text-align: left;
 }
 </style>
