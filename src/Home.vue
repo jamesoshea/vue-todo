@@ -34,7 +34,7 @@
         this.newTitle = this.newText = ''
       },
       deleteTodo(i) {
-        this.$store.commit('delete', i)
+        this.$store.commit('deleteTodo', i)
       },
       showText(i) {
         this.$store.commit('showText', i)

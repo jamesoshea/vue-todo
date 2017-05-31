@@ -29,8 +29,18 @@ export const store = new Vuex.Store({
           state.todos[i].expanded = !state.todos[i].expanded
         }
       },
-      delete(state, i) {
+      deleteTodo(state, i) {
         state.todos.splice(i, 1);
+      }
+    },
+    actions: {
+      add(context, todo) {
+        //async code goes here
+        context.commit('register', todo)
+      },
+      deleteTodo(context, i) {
+        //async here
+        context.commit('deleteTodo', i)
       }
     }
 });
