@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <h1>this is a sick app hey</h1>
-    <hr>
+    <h1>fully sick todo app</h1>
     <router-link to="/">Home</router-link>
     <router-link to="/stats">Stats</router-link>
     <hr>
@@ -11,12 +10,7 @@
 
 <script>
 export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
+  name: 'app'
 }
 </script>
 

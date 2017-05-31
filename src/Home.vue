@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1>Here are some things to do:</h1>
-    <div v-for="(todo, i) in todos">
-      <h3>{{ todo.title }}</h3>
+    <h4 v-if="this.todos">Here are some things to do:</h4>
+    <div class="todo" v-for="(todo, i) in todos">
+      <h5>{{ todo.title }}</h5>
       <p>{{ todo.text }} <br>
       submitted at: {{ todo.time }}</p>
       <button @click="deleteTodo(i)">Delete this</button>
+      <hr>
     </div>
     <input type="text" v-model="newTitle" placeholder="Add a new todo">
     <input type="text" v-model="newText" placeholder="Describe it">
@@ -47,5 +48,8 @@
 </script>
 
 <style scoped>
-
+.todo {
+  width: 80%;
+  margin: auto;
+}
 </style>
