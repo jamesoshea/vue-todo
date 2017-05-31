@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 v-if="this.todos.length > 0">Your todos:</h4>
+    <h4 v-if="todosArr.length > 0">Your todos:</h4>
     <div class="todo" v-for="(todo, i) in todos">
       <h5>{{ todo.title }}</h5>
       <p @click="showText(i)" class="summary">{{ todo.summary }} </p>
@@ -21,7 +21,12 @@
       return {
         newTitle: '',
         newText: '',
-        todos: []
+        todosArr: []
+      }
+    },
+    computed: {
+      todos() {
+        return this.$store.state.todos
       }
     },
     methods: {
@@ -30,19 +35,19 @@
         let hours = padZeros(date.getHours())
         let minutes = padZeros(date.getMinutes())
         let time = hours + ':' + minutes
-        this.todos.push({ title: this.newTitle, text: this.newText, summary: this.newText.slice(0, 50) + '...', time: time, expanded: false})
+        this.$store.state.todos.push({ title: this.newTitle, text: this.newText, summary: this.newText.slice(0, 50) + '...', time: time, expanded: false})
         this.newTitle = this.newText = ''
       },
       deleteTodo(i) {
-        this.todos.splice(i, 1);
+        this.$store.state.todos.splice(i, 1);
       },
       showText(i) {
-        if(!this.todos[i].expanded) {
-          this.todos[i].summary = this.todos[i].text
-          this.todos[i].expanded = !this.todos[i].expanded
+        if(!this.$store.state.todos[i].expanded) {
+          this.$store.state.todos[i].summary = this.$store.state.todos[i].text
+          this.$store.state.todos[i].expanded = !this.$store.state.todos[i].expanded
         } else {
-          this.todos[i].summary = this.todos[i].text.slice(0, 50) + '...'
-          this.todos[i].expanded = !this.todos[i].expanded
+          this.$store.state.todos[i].summary = this.$store.state.todos[i].text.slice(0, 50) + '...'
+          this.$store.state.todos[i].expanded = !this.$store.state.todos[i].expanded
         }
       }
     }
@@ -50,9 +55,9 @@
 
   function padZeros(inp){
     if (inp == 0) {
-      return '00'
+      return '00';
     }
-    else if (inp < 10 && > 0) {
+    else if (inp < 10 && inp > 0) {
       return '0' + inp;
     }
     return String(inp);
