@@ -2,10 +2,16 @@
   <div>
     <h4 v-if="todosArr.length > 0">Your todos:</h4>
     <div class="todo" v-for="(todo, i) in todos">
-      <h5>{{ todo.title }}</h5>
+      <div class="row">
+        <div class="eight columns">
+          <h5 class="title">{{ todo.title }}</h5>
+        </div>
+        <div class="four columns del">
+          <button @click="deleteTodo(i)">Delete</button>
+        </div>
+      </div>
       <p @click="showText(i)" class="summary">{{ todo.summary }} </p>
       <p>submitted at: {{ todo.time }}</p>
-      <button @click="deleteTodo(i)">Delete this</button>
       <hr>
     </div>
     <input type="text" v-model="newTitle" placeholder="Add a new todo">
@@ -44,13 +50,28 @@
 </script>
 
 <style scoped>
+
+p {
+  margin-bottom: 1rem;
+}
+
 .todo {
   width: 80%;
   margin: auto;
 }
 
+.title {
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.del {
+  text-align: right;
+}
+
 .summary {
   color: #42b983;
   text-decoration: underline;
+  text-align: justify;
 }
 </style>
