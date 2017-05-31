@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>fully sick todo app</h1>
-    <router-link to="/">Home</router-link>
+    <router-link to="/">Todos</router-link>
     <router-link to="/stats">Stats</router-link>
     <hr>
     <router-view></router-view>

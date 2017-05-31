@@ -11,7 +11,7 @@
         </div>
       </div>
       <p @click="showText(i)" class="summary">{{ todo.summary }} </p>
-      <p class="time-submitted">submitted {{ relTime(todo.date) }}</p>
+      <p class="time-submitted">added {{ relTime(todo.date) }}</p>
       <hr>
     </div>
     <input type="text" v-model="newTitle" placeholder="Add a new todo" autofocus="true">
