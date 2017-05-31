@@ -3,3 +3,5 @@ node_modules/
 dist/
 npm-debug.log
 yarn-error.log
+
+mongoose-free-6.5.exe
