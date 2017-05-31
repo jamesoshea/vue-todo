@@ -10,7 +10,6 @@
     </div>
     <input type="text" v-model="newTitle" placeholder="Add a new todo">
     <input type="text" v-model="newText" placeholder="Describe it">
-    <hr />
     <button @click="addTodo">Add</button>
   </div>
 </template>
@@ -26,41 +25,21 @@
     },
     computed: {
       todos() {
-        return this.$store.state.todos
+        return this.$store.getters.allTodos
       }
     },
     methods: {
       addTodo() {
-        let date = new Date()
-        let hours = padZeros(date.getHours())
-        let minutes = padZeros(date.getMinutes())
-        let time = hours + ':' + minutes
-        this.$store.state.todos.push({ title: this.newTitle, text: this.newText, summary: this.newText.slice(0, 50) + '...', time: time, expanded: false})
+        this.$store.commit('add', {newTitle: this.newTitle, newText: this.newText})
         this.newTitle = this.newText = ''
       },
       deleteTodo(i) {
-        this.$store.state.todos.splice(i, 1);
+        this.$store.commit('delete', i)
       },
       showText(i) {
-        if(!this.$store.state.todos[i].expanded) {
-          this.$store.state.todos[i].summary = this.$store.state.todos[i].text
-          this.$store.state.todos[i].expanded = !this.$store.state.todos[i].expanded
-        } else {
-          this.$store.state.todos[i].summary = this.$store.state.todos[i].text.slice(0, 50) + '...'
-          this.$store.state.todos[i].expanded = !this.$store.state.todos[i].expanded
-        }
+        this.$store.commit('showText', i)
       }
     }
-  }
-
-  function padZeros(inp){
-    if (inp == 0) {
-      return '00';
-    }
-    else if (inp < 10 && inp > 0) {
-      return '0' + inp;
-    }
-    return String(inp);
   }
 </script>
 
