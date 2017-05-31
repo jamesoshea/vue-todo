@@ -3,7 +3,7 @@ import moment from 'moment'
 export default {
   add(state, todo) {
     let now = new Date()
-    state.todos.push({ title: todo.newTitle, text: todo.newText, summary: todo.newText.slice(0, 50) + '...', date: moment(new Date)})
+    state.todos.push({ title: todo.newTitle, text: todo.newText, summary: todo.newText.slice(0, 50) + '...', date: moment.utc(new Date)})
   },
   showText(state, i) {
     if(!state.todos[i].expanded) {

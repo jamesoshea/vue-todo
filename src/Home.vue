@@ -14,7 +14,7 @@
       <p class="time-submitted">submitted {{ relTime(todo.date) }}</p>
       <hr>
     </div>
-    <input type="text" v-model="newTitle" placeholder="Add a new todo">
+    <input type="text" v-model="newTitle" placeholder="Add a new todo" autofocus="true">
     <input type="text" v-model="newText" placeholder="Describe it">
     <button @click="addTodo">Add</button>
   </div>
@@ -48,7 +48,7 @@
         this.$store.commit('showText', i)
       },
       relTime(subTime) {
-        return moment(subTime).fromNow();
+        return moment.utc(subTime).fromNow();
       }
     }
   }
