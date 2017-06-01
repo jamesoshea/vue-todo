@@ -6,12 +6,14 @@ import { store } from './store/store';
 import App from './App.vue'
 import Home from './Home.vue'
 import Stats from './Stats.vue'
+import Login from './Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/stats', component: Stats},
-  { path: '/', component: Home}
+  { path: '/', component: Home},
+  { path: '/login', component: Login}
 ]
 
 const router = new VueRouter({

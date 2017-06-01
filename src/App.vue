@@ -3,6 +3,7 @@
     <h1>fully sick todo app</h1>
     <router-link to="/">Todos</router-link>
     <router-link to="/stats">Stats</router-link>
+    <router-link to="/login">Login</router-link>
     <hr>
     <router-view></router-view>
   </div>
