@@ -7,6 +7,9 @@ app.get('*', function (req, res) {
   res.sendFile(__dirname + '/public/index.html')
 })
 
-app.listen(3000, () => {
+// Set Port
+app.set('port', (process.env.PORT || 3000));
+
+app.listen(app.get('port'), () => {
   console.log('Server started.')
 })
