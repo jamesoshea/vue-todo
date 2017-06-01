@@ -15,6 +15,9 @@ export default {
       total += a.diff(b, 'seconds')
     })
     return formatTotalTime(total)
+  },
+  completedTodos(state) {
+    return state.completed
   }
 }
 

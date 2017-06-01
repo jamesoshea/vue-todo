@@ -22,9 +22,6 @@
 
   export default {
     methods: {
-      goHome() {
-        this.$router.push('/')
-      }
     },
     computed: {
       total() {
@@ -40,7 +37,7 @@
         return 'todos'
       },
       compTotal() {
-        return this.$store.state.completed
+        return this.$store.getters.completedTodos
       }
     }
   }
