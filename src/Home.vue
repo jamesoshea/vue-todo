@@ -1,5 +1,8 @@
 <template>
   <div>
+    <input type="text" v-model="newTitle" placeholder="Add a new todo" autofocus="true">
+    <input type="text" v-model="newText" placeholder="Describe it">
+    <button @click="addTodo">Add</button>
     <h4 v-if="todosArr.length > 0">Your todos:</h4>
     <div class="todo" v-for="(todo, i) in todos">
       <div class="row">
@@ -8,15 +11,13 @@
         </div>
         <div class="four columns del">
           <button @click="deleteTodo(i)">Delete</button>
+          <button @click="completeTodo(i)">Completed</button>
         </div>
       </div>
       <p @click="showText(i)" class="summary">{{ todo.summary }} </p>
       <p class="time-submitted">added {{ relTime(todo.date) }}</p>
       <hr>
     </div>
-    <input type="text" v-model="newTitle" placeholder="Add a new todo" autofocus="true">
-    <input type="text" v-model="newText" placeholder="Describe it">
-    <button @click="addTodo">Add</button>
   </div>
 </template>
 
@@ -48,7 +49,11 @@
         this.$store.commit('showText', i)
       },
       relTime(subTime) {
-        return moment.utc(subTime).fromNow();
+        return moment.utc(subTime).fromNow()
+      },
+      completeTodo(i) {
+        this.$store.state.completed++
+        this.deleteTodo(i)
       }
     }
   }
