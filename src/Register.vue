@@ -33,7 +33,7 @@
           completed: this.$store.getters.completed
         })
           .then((res) => {
-            self.message = 'lol'
+            this.message = 'lol'
           })
           .catch(function (error) {
             console.log(error);
