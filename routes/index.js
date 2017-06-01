@@ -10,7 +10,8 @@ router.get('/', function (req, res) {
 
 router.post('/registerUser', (req, res) => {
   if (req.body.password !== req.body.password2) {
-    res.sendStatus(200).json({ message: "Your passwords did not match" });
+    console.log(req.body.password, req.body.password2)
+    res.send({ message: "Your passwords did not match" });
   }
 
   var stuff = {
