@@ -1,15 +1,17 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 let app = express()
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/public/index.html')
-})
+var routes = require('./routes/index');
 
-app.get('/login', function (req, res) {
-  res.send('hello')
-})
+// BodyParser Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//use route files
+app.use('/', routes);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));

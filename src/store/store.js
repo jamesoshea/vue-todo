@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
+        userId: undefined,
         todos: [],
         completed: 0
     },

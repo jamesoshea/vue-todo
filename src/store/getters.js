@@ -18,6 +18,9 @@ export default {
   },
   completedTodos(state) {
     return state.completed
+  },
+  userId(state) {
+    return state.userId
   }
 }
 
