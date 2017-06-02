@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 var router = express.Router()
 
@@ -29,7 +30,16 @@ router.post('/registerUser', (req, res) => {
       todos: req.body.todos,
       completed: req.body.completed
     });
-    console.log(newUser);
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(newUser.password, salt, function(err, hash) {
+          newUser.password = hash;
+          console.log(newUser)
+          newUser.save((err) => {
+            if(err) throw err;
+            res.json({message: 'User successfully created'})
+          });
+      });
+    })
   }
 })
 

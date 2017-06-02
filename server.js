@@ -1,7 +1,9 @@
 const express = require('express')
-const bodyParser = require('body-parser');
-const expressValidator = require('express-validator');
+const bodyParser = require('body-parser')
+const expressValidator = require('express-validator')
+const mongoose = require('mongoose')
 
+mongoose.connect('mongodb://james:DBtelecaster1@ds159371.mlab.com:59371/jim-todo')
 let app = express()
 
 app.use(express.static(__dirname + '/public'));
