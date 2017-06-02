@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+
 var router = express.Router()
 
 var User = require('../models/user')
@@ -9,20 +10,27 @@ router.get('/', function (req, res) {
 })
 
 router.post('/registerUser', (req, res) => {
-  if (req.body.password !== req.body.password2) {
-    console.log(req.body.password, req.body.password2)
-    res.send({ message: "Your passwords did not match" });
-  }
 
-  var stuff = {
-    email: req.body.email,
-    name: req.body.name,
-    password: req.body.password,
-    password2: req.body.password2,
-    todos: req.body.todos,
-    completed: req.body.completed
+  req.checkBody('name', 'Name is required').notEmpty();
+  req.checkBody('email', 'Email is required').notEmpty();
+	req.checkBody('email', 'Email is not valid').isEmail();
+	req.checkBody('password', 'Password is required').notEmpty();
+	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+
+  var errors = req.validationErrors();
+  if (errors) {
+    res.json({'message': errors});
+  } else {
+    var newUser = new User({
+      email: req.body.email,
+      name: req.body.name,
+      password: req.body.password,
+      password2: req.body.password2,
+      todos: req.body.todos,
+      completed: req.body.completed
+    });
+    console.log(newUser);
   }
-  console.log(stuff.todos)
 })
 
 function ensureAuthenticated(req, res, next){

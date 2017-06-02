@@ -30,10 +30,10 @@
           password: this.password,
           password2: this.password2,
           todos: this.$store.getters.allTodos,
-          completed: this.$store.getters.completed
+          completed: this.$store.getters.completedTodos
         })
           .then((res) => {
-            this.message = 'lol'
+            this.message = res.data.message
           })
           .catch(function (error) {
             console.log(error);

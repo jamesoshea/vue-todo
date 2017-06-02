@@ -15,6 +15,12 @@ var UserSchema = mongoose.Schema({
 	},
 	name: {
 		type: String
+	},
+	todos: {
+		type: Array
+	},
+	completed: {
+		type: Number
 	}
 });
 
