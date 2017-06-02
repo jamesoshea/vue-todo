@@ -19,7 +19,8 @@
     "mongoose": "^4.10.4",
     "vue": "^2.3.3",
     "vue-router": "^2.5.3",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "xss-filters": "^1.2.7"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

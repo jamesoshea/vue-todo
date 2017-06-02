@@ -1,53 +1,60 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const xssFilters = require('xss-filters')
 
 var router = express.Router()
 
 var User = require('../models/user')
 
+//home route, sends app
 router.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/index.html')
 })
 
 router.post('/registerUser', (req, res) => {
+  //validate input
+  req.checkBody('name', 'Name is required').notEmpty()
+  req.checkBody('email', 'Email is required').notEmpty()
+	req.checkBody('email', 'Email is not valid').isEmail()
+	req.checkBody('password', 'Password is required').notEmpty()
+	req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
 
-  req.checkBody('name', 'Name is required').notEmpty();
-  req.checkBody('email', 'Email is required').notEmpty();
-	req.checkBody('email', 'Email is not valid').isEmail();
-	req.checkBody('password', 'Password is required').notEmpty();
-	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-
-  var errors = req.validationErrors();
+  var errors = req.validationErrors()
   if (errors) {
-    res.json({'message': errors});
+    res.status(400).json({message: errors})
   } else {
-    var newUser = new User({
-      email: req.body.email,
-      name: req.body.name,
-      password: req.body.password,
-      password2: req.body.password2,
-      todos: req.body.todos,
-      completed: req.body.completed
-    });
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(newUser.password, salt, function(err, hash) {
-          newUser.password = hash;
-          console.log(newUser)
-          newUser.save((err) => {
-            if(err) throw err;
-            res.json({message: 'User successfully created'})
-          });
-      });
+
+    User.findOne({email: req.body.email}, (err, doc) => {
+      if (err) throw err;
+      if (doc) {
+        res.status(400).json({message: [{msg: 'This email is already taken.'}]})
+      } else {
+        var newUser = new User({
+          //sanitise user input
+          email: xssFilters.inHTMLData(req.body.email),
+          name: xssFilters.inHTMLData(req.body.name),
+          password: xssFilters.inHTMLData(req.body.password),
+          password2: xssFilters.inHTMLData(req.body.password2),
+          todos: req.body.todos,
+          completed: xssFilters.inHTMLData(req.body.completed)
+        })
+        //generate password hash
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(newUser.password, salt, function(err, hash) {
+              newUser.password = hash
+              newUser.save((err) => {
+                if(err) throw err
+                res.status(200).json({message: 'User successfully created'})
+              })
+          })
+        })
+      }
     })
   }
 })
 
-function ensureAuthenticated(req, res, next){
-  if(req.isAuthenticated()) {
-    return next();
-  } else {
-    res.send({status: 'failure'})
-  }
-}
+router.post('loginUser', (req, res) => {
+
+})
 module.exports = router

@@ -33,11 +33,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin({
-      multiStep: true
-    })
-  ],
+  // plugins: [
+  //   new webpack.HotModuleReplacementPlugin({
+  //     multiStep: true
+  //   })
+  // ],
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
