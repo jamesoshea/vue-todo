@@ -40,8 +40,8 @@
               this.message = res.data.message
               this.name = this.email = this.password = this.password2 = ''
           })
-          .catch(function (error) {
-            self.message = error.response.data.message[0].msg
+          .catch((err) => {
+            self.message = err.response.data.message[0].msg
             self.success = false
           });
       }

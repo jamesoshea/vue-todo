@@ -47,7 +47,8 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     proxy: {
-      '/registerUser': 'http://localhost:3000'
+      '/registerUser': 'http://localhost:3000',
+      '/loginUser': 'http://localhost:3000'
     }
   },
   performance: {

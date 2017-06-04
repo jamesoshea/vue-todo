@@ -54,7 +54,30 @@ router.post('/registerUser', (req, res) => {
   }
 })
 
-router.post('loginUser', (req, res) => {
-
+router.post('/loginUser', (req, res) => {
+  let email = req.body.email
+  let password = req.body.password
+  User.findOne({email: email}, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      res.status(400).json({message: [{msg: 'User not found.'}]})
+    } else {
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if(err) throw err;
+        if (isMatch) {
+          res.status(200).json({
+            message: 'login successful',
+            userData : {
+              id: user._id,
+              todos: user.todos,
+              completed: user.completed
+            }
+          })
+        } else {
+          res.status(400).json({message: [{msg: 'Password incorrect.'}]})
+        }
+      })
+    }
+  })
 })
 module.exports = router

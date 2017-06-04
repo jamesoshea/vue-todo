@@ -16,5 +16,13 @@ export default {
   },
   deleteTodo(state, i) {
     state.todos.splice(i, 1);
+  },
+  setUser(state, user) {
+    state.userId = user.id,
+    state.todos = user.todos,
+    state.completed = user.completed
+  },
+  logout(state) {
+    state.userId = undefined
   }
 }

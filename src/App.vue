@@ -5,7 +5,7 @@
     <router-link to="/stats">Stats</router-link>
     <router-link v-if="userId == undefined" to="/register">Register</router-link>
     <router-link v-if="userId == undefined" to="/login">Login </router-link>
-    <router-link v-else to="/logout">Logout</router-link>
+    <router-link v-else to="/login" @click.native="logout">Logout</router-link>
     <hr>
     <router-view></router-view>
   </div>
@@ -18,6 +18,11 @@ export default {
   computed: {
     userId() {
       return this.$store.getters.userId
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit('logout')
     }
   }
 }

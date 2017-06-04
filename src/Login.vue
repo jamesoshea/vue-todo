@@ -1,10 +1,45 @@
 <template>
   <div>
-    LOGIN ROUTE
+    <input type="text" v-model="email" placeholder="email">
+    <input type="password" v-model="password" placeholder="password">
+    <button @click="sendLogin">Login</button>
+    <p id="message">{{ message }}</p>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
+
+  export default {
+    data() {
+      return {
+        email: '',
+        password: '',
+        message: ''
+      }
+    },
+    methods: {
+      sendLogin() {
+        const self = this
+        axios.post('/loginUser', {
+          email: this.email,
+          password: this.password
+        })
+          .then((res) => {
+            this.success = true
+            this.message = res.data.message
+            this.$store.commit('setUser', res.data.userData)
+          })
+          .catch((err) => {
+            self.message = err.response.data.message[0].msg
+            self.success = false
+          })
+      }
+    },
+    computed: {
+
+    }
+  }
 </script>
 
 <style scoped>
