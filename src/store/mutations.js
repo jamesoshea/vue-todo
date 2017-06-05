@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { EventBus } from '../eventBus.js';
 
 export default {
   add(state, todo) {
