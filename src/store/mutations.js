@@ -18,11 +18,21 @@ export default {
     state.todos.splice(i, 1);
   },
   setUser(state, user) {
-    state.userId = user.id,
-    state.todos = user.todos,
-    state.completed = user.completed
+    if(user) {
+      state.userId = user.id,
+      state.todos = user.todos,
+      state.completed = user.completed
+    } else {
+      state.userId = undefined
+    }
   },
   logout(state) {
     state.userId = undefined
+    state.todos = []
+    state.completed = 0
+    state.message = 'You have been logged out'
+  },
+  setMessage(state, message) {
+    state.message = message
   }
 }

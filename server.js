@@ -8,6 +8,9 @@ let app = express()
 
 app.use(express.static(__dirname + '/public'));
 
+//secret for jwt
+app.set('superSecret', 'mememachine');
+
 var routes = require('./routes/index');
 
 // BodyParser Middleware

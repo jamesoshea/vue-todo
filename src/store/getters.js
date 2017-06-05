@@ -21,6 +21,9 @@ export default {
   },
   userId(state) {
     return state.userId
+  },
+  message(state) {
+    return state.message
   }
 }
 

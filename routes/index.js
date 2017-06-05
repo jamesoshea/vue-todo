@@ -2,10 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const xssFilters = require('xss-filters')
+const jwt = require('jsonwebtoken')
 
-var router = express.Router()
+let router = express.Router()
 
-var User = require('../models/user')
+const User = require('../models/user')
 
 //home route, sends app
 router.get('/', function (req, res) {
@@ -65,8 +66,12 @@ router.post('/loginUser', (req, res) => {
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if(err) throw err;
         if (isMatch) {
+          let token = jwt.sign(user, 'mememachine', { expiresIn: '1h' }, {
+            expiresInMinutes: 1440
+          });
           res.status(200).json({
             message: 'login successful',
+            token: token,
             userData : {
               id: user._id,
               todos: user.todos,

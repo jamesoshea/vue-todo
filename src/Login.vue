@@ -3,7 +3,6 @@
     <input type="text" v-model="email" placeholder="email">
     <input type="password" v-model="password" placeholder="password">
     <button @click="sendLogin">Login</button>
-    <p id="message">{{ message }}</p>
   </div>
 </template>
 
@@ -14,8 +13,7 @@
     data() {
       return {
         email: '',
-        password: '',
-        message: ''
+        password: ''
       }
     },
     methods: {
@@ -26,13 +24,14 @@
           password: this.password
         })
           .then((res) => {
-            this.success = true
-            this.message = res.data.message
+            this.$store.commit('setMessage', res.data.message)
             this.$store.commit('setUser', res.data.userData)
+            localStorage.setItem('token', res.data.token)
           })
           .catch((err) => {
-            self.message = err.response.data.message[0].msg
-            self.success = false
+            self.$store.commit('setUser', undefined)
+            self.$store.commit('setMessage', err.response.data.message[0].msg)
+            self.message = self.$store.getters.message
           })
       }
     },

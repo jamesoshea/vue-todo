@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
     state: {
         userId: undefined,
         todos: [],
-        completed: 0
+        completed: 0,
+        message: ''
     },
     getters,
     mutations,

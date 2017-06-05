@@ -15,13 +15,19 @@
 
 export default {
   name: 'app',
+  data() {
+    return {
+      message: ''
+    }
+  }
   computed: {
     userId() {
       return this.$store.getters.userId
     }
   },
   methods: {
-    logout() {
+    logout(event) {
+      localStorage.removeItem('token')
       this.$store.commit('logout')
     }
   }
