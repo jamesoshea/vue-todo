@@ -48,7 +48,8 @@ module.exports = {
     noInfo: true,
     proxy: {
       '/registerUser': 'http://localhost:3000',
-      '/loginUser': 'http://localhost:3000'
+      '/loginUser': 'http://localhost:3000',
+      '/addTodo': 'http://localhost:3000'
     }
   },
   performance: {

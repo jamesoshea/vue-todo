@@ -1,9 +1,18 @@
 import moment from 'moment'
+import axios from 'axios'
 
 export default {
   add(state, todo) {
     let now = new Date()
-    state.todos.push({ title: todo.newTitle, text: todo.newText, summary: todo.newText.slice(0, 50) + '...', date: moment.utc(new Date)})
+    let formattedTodo = { title: todo.newTitle, text: todo.newText, summary: todo.newText.slice(0, 50) + '...', date: moment.utc(new Date)}
+    state.todos.push(formattedTodo)
+    axios.post('/addTodo', {todos: state.todos, user: state.userId, token: localStorage.getItem('token')})
+      .then((res) => {
+        state.message = res.data.message
+      })
+      .catch((err) =>{
+
+      })
   },
   showText(state, i) {
     if(!state.todos[i].expanded) {

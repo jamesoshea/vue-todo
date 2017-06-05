@@ -66,9 +66,7 @@ router.post('/loginUser', (req, res) => {
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if(err) throw err;
         if (isMatch) {
-          let token = jwt.sign(user, 'mememachine', { expiresIn: '1h' }, {
-            expiresInMinutes: 1440
-          });
+          let token = jwt.sign({id: user._id}, 'mememachine', { expiresIn: '1h' });
           res.status(200).json({
             message: 'login successful',
             token: token,
@@ -85,4 +83,15 @@ router.post('/loginUser', (req, res) => {
     }
   })
 })
+
+router.post('/addTodo', (req, res) => {
+  jwt.verify(req.body.token, 'mememachine', function(err, decoded) {
+    console.log(decoded.id)
+    User.findOneAndUpdate({_id: decoded.id}, { $set: { "todos": req.body.todos}}, (err, doc) => {
+      if (err) throw err;
+      res.status(200).json({ message: 'todos updated.'})
+    })
+  });
+})
+
 module.exports = router
