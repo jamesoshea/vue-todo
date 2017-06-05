@@ -15,11 +15,6 @@
 
 export default {
   name: 'app',
-  data() {
-    return {
-      message: ''
-    }
-  }
   computed: {
     userId() {
       return this.$store.getters.userId
@@ -27,7 +22,6 @@ export default {
   },
   methods: {
     logout(event) {
-      localStorage.removeItem('token')
       this.$store.commit('logout')
     }
   }

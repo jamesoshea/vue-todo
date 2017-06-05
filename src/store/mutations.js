@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { EventBus } from '../eventBus.js';
 
 export default {
   add(state, todo) {
@@ -27,10 +28,12 @@ export default {
     }
   },
   logout(state) {
+    localStorage.removeItem('token')
     state.userId = undefined
     state.todos = []
     state.completed = 0
-    state.message = 'You have been logged out'
+    state.message = ''
+
   },
   setMessage(state, message) {
     state.message = message
