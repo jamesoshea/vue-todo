@@ -6,13 +6,15 @@ export default {
     let now = new Date()
     let formattedTodo = { title: todo.newTitle, text: todo.newText, summary: todo.newText.slice(0, 50) + '...', date: moment.utc(new Date)}
     state.todos.push(formattedTodo)
-    axios.post('/addTodo', {todos: state.todos, user: state.userId, token: localStorage.getItem('token')})
-      .then((res) => {
-        state.message = res.data.message
-      })
-      .catch((err) =>{
-
-      })
+    if (state.userId) {
+      axios.post('/addTodo', {todos: state.todos, user: state.userId, token: localStorage.getItem('token')})
+        .then((res) => {
+          state.message = res.data.message
+        })
+        .catch((err) =>{
+          state.message = err.response.data.message
+        })
+    }
   },
   showText(state, i) {
     if(!state.todos[i].expanded) {
