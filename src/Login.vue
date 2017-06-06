@@ -8,7 +8,6 @@
 </template>
 
 <script>
-  var errr;
   import axios from 'axios'
 
   export default {

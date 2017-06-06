@@ -26,7 +26,7 @@ export default {
     }
   },
   deleteTodo(state, i) {
-    state.todos.splice(i, 1);
+    state.todos.splice(i, 1)
   },
   setUser(state, user) {
     if(user) {

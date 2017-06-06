@@ -7,5 +7,4 @@ export default {
     //async here
     context.commit('deleteTodo', i)
   }
-
 }

@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 // User Schema
-var UserSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
 	username: {
 		type: String,
 		index:true
@@ -22,6 +22,6 @@ var UserSchema = mongoose.Schema({
 	completed: {
 		type: Number
 	}
-});
+})
 
-var User = module.exports = mongoose.model('User', UserSchema);
+const User = module.exports = mongoose.model('User', UserSchema)
