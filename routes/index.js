@@ -86,10 +86,23 @@ router.post('/loginUser', (req, res) => {
 
 router.post('/addTodo', (req, res) => {
   jwt.verify(req.body.token, 'mememachine', (err, decoded) => {
-    console.log(decoded.id)
     User.findOneAndUpdate({_id: decoded.id}, { $set: { "todos": req.body.todos}}, (err, doc) => {
       if (err) throw err
       res.status(200).json({ message: 'todos updated.'})
+    })
+  })
+})
+
+router.post('/autoLogin', (req, res) => {
+  jwt.verify(req.body.token, 'mememachine', (err, decoded) => {
+    User.findOne({_id: decoded.id}, (err, user) => {
+      console.log(user)
+      if (err) throw err
+      if (user) {
+        res.status(200).json({ userData : { id: user._id, todos: user.todos, completed: user.completed}})
+      } else {
+        res.status(400).json({ message: 'User not found.'})
+      }
     })
   })
 })
