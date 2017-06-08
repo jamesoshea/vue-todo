@@ -42,7 +42,7 @@ router.post('/registerUser', (req, res) => {
         })
         //generate password hash
         bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, function(err, hash) {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
               newUser.password = hash
               newUser.save((err) => {
                 if(err) throw err
@@ -73,7 +73,8 @@ router.post('/loginUser', (req, res) => {
             userData : {
               id: user._id,
               todos: user.todos,
-              completed: user.completed
+              completed: user.completed,
+              name: user.name
             }
           })
         } else {
@@ -86,7 +87,7 @@ router.post('/loginUser', (req, res) => {
 
 router.post('/addTodo', (req, res) => {
   jwt.verify(req.body.token, 'mememachine', (err, decoded) => {
-    User.findOneAndUpdate({_id: decoded.id}, { $set: { "todos": req.body.todos}}, (err, doc) => {
+    User.findOneAndUpdate({_id: decoded.id}, { $set: { "todos": req.body.todos} }, (err, doc) => {
       if (err) throw err
       res.status(200).json({ message: 'todos updated.'})
     })
@@ -95,11 +96,11 @@ router.post('/addTodo', (req, res) => {
 
 router.post('/autoLogin', (req, res) => {
   jwt.verify(req.body.token, 'mememachine', (err, decoded) => {
+    if (err) throw error
     User.findOne({_id: decoded.id}, (err, user) => {
-      console.log(user)
       if (err) throw err
       if (user) {
-        res.status(200).json({ userData : { id: user._id, todos: user.todos, completed: user.completed}})
+        res.status(200).json({ userData : { id: user._id, todos: user.todos, completed: user.completed, name: user.name}})
       } else {
         res.status(400).json({ message: 'User not found.'})
       }

@@ -30,9 +30,10 @@ export default {
   },
   setUser(state, user) {
     if(user) {
-      state.userId = user.id,
-      state.todos = user.todos,
+      state.userId = user.id
+      state.todos = user.todos
       state.completed = user.completed
+      state.name = user.name
     } else {
       state.userId = undefined
     }
@@ -43,7 +44,7 @@ export default {
     state.todos = []
     state.completed = 0
     state.message = ''
-
+    state.name = ''
   },
   setMessage(state, message) {
     state.message = message

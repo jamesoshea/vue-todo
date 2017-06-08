@@ -24,6 +24,9 @@ export default {
   },
   message(state) {
     return state.message
+  },
+  name(state) {
+    return state.name
   }
 }
 

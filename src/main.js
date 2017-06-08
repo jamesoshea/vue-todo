@@ -37,10 +37,7 @@ new Vue({
           self.$store.commit('setUser', res.data.userData)
         })
         .catch((err) => {
-          console.log('Invalid token.')
         })
-    } else {
-      console.log('no token.')
     }
   }
 })

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <h1>fully sick todo app</h1>
+    <h1 v-if="userId">hello, {{ name }}</h1>
+    <h1 v-else>fully sick todo app</h1>
     <router-link to="/">Todos</router-link>
     <router-link to="/stats">Stats</router-link>
     <router-link v-if="userId == undefined" to="/register">Register</router-link>
@@ -18,6 +19,9 @@ export default {
   computed: {
     userId() {
       return this.$store.getters.userId
+    },
+    name() {
+      return this.$store.getters.name
     }
   },
   methods: {

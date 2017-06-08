@@ -26,6 +26,7 @@
         })
           .then((res) => {
             this.$store.commit('setUser', res.data.userData)
+            this.$router.push('/')
             this.$store.commit('setMessage', res.data.message)
             localStorage.setItem('token', res.data.token)
             this.email = this.password = ''

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
 
@@ -12,9 +11,9 @@ export const store = new Vuex.Store({
         userId: undefined,
         todos: [],
         completed: 0,
-        message: ''
+        message: '',
+        name: ''
     },
     getters,
-    mutations,
-    actions
+    mutations
 });
