@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h4>stats</h4>
     <div class="row">
       <div class="six columns">
         <h1 class="num-total">{{ total }}</h1>

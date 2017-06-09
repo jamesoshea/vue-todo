@@ -1,7 +1,8 @@
 <template>
   <div>
-    <input type="text" v-model="email" placeholder="email">
-    <input type="password" v-model="password" placeholder="password">
+    <h4>login</h4>
+    <input type="text" v-model="email" placeholder="email" @input="reset" autofocus>
+    <input type="password" v-model="password" placeholder="password" @input="reset">
     <button @click="sendLogin">Login</button>
     <p>{{ message }}</p>
   </div>
@@ -35,6 +36,9 @@
             self.$store.commit('setUser', undefined)
             self.$store.commit('setMessage', err.response.data.message[0].msg)
           })
+      },
+      reset() {
+        this.$store.commit('setMessage', '')
       }
     },
     computed: {

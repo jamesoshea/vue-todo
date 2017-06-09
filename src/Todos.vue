@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h4>home</h4>
     <div class="entry">
       <input type="text" v-model="newTitle" placeholder="Add a new todo" autofocus="true" class="entry-boxes">
       <input type="text" v-model="newText" placeholder="Describe it" class="entry-boxes">
