@@ -66,7 +66,6 @@ export default {
 
 #header {
   background-color: #263d36;
-  background-image: url("../public/images/header.jpg");
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;

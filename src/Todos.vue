@@ -6,12 +6,15 @@
       <input type="text" v-model="newText" placeholder="Describe it" class="entry-boxes"><br>
       <button @click="addTodo" class="entry-boxes">Add</button>
     </div>
+    <div class="spacer">
+      &nbsp;
+    </div>
     <div class="todo" v-for="(todo, i) in todos">
-      <div class="row">
-        <div class="eight columns">
+      <div class="container">
+        <div class="col">
           <h5 class="title">{{ todo.title }}</h5>
         </div>
-        <div class="four columns del">
+        <div class="col del">
           <button @click="deleteTodo(i)">Delete</button>
           <button @click="completeTodo(i)">Completed</button>
         </div>
@@ -65,10 +68,6 @@
 
 p {
   margin-bottom: 1rem;
-}
-
-.entry-boxes {
-  margin-bottom: 0rem;
 }
 
 .todo {

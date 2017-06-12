@@ -1,13 +1,15 @@
 <template>
-  <div class="entry-boxes">
+  <div>
     <h4 class="subtitle">register</h4>
-    <input type="text" v-model="name" placeholder="name"><br>
-    <input type="text" v-model="email" placeholder="email"><br>
-    <input type="password" v-model="password" placeholder="password"><br>
-    <input type="password" v-model="password2" placeholder="confirm password"><br>
-    <button type="button" @click="submit">submit</button>
-    <p id="message">{{ message }}</p>
-    <router-link v-if="success == true" to="/login">You can now log in</router-link>
+    <div class="entry-boxes">
+      <input type="text" v-model="name" placeholder="name"><br>
+      <input type="text" v-model="email" placeholder="email"><br>
+      <input type="password" v-model="password" placeholder="password"><br>
+      <input type="password" v-model="password2" placeholder="confirm password"><br>
+      <button type="button" @click="submit">submit</button>
+      <p id="message">{{ message }}</p>
+      <router-link v-if="success == true" to="/login">You can now log in</router-link>
+    </div>
   </div>
 </template>
 
