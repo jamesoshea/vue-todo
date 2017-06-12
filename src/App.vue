@@ -3,7 +3,7 @@
     <div id="header">
             <div class="container">
               <h1 class="col"><i class="material-icons" @click="menuToggle">&#xE896;</i></h1>
-              <h1 class="col"><router-link to="/stats"><i class="material-icons">&#xE8A6;</i></router-link></h1>
+              <h1 class="col"><router-link to="/stats"><i class="material-icons" @click="hideMenu">&#xE8A6;</i></router-link></h1>
               <h1 class="col" v-if="userId">hello, {{ name }}</h1>
               <h1 class="col" v-else>fully sick todo app</h1>
             </div>
@@ -11,14 +11,14 @@
     <transition name="fade">
       <template v-if="menuShown">
         <div id="menu">
-          <p><router-link to="/">Todos</router-link></p>
-          <p><router-link to="/stats">Stats</router-link></p>
+          <p @click="hideMenu"><router-link to="/">Todos</router-link></p>
+          <p @click="hideMenu"><router-link to="/stats">Stats</router-link></p>
           <template v-if="userId == undefined">
-            <p><router-link to="/register">Register</router-link></p>
-            <p><router-link to="/login">Login </router-link></p>
+            <p @click="hideMenu"><router-link to="/register">Register</router-link></p>
+            <p @click="hideMenu"><router-link to="/login">Login </router-link></p>
           </template>
           <template v-else>
-            <p><router-link to="/login" @click.native="logout">Logout</router-link></p>
+            <p @click="hideMenu"><router-link to="/login" @click.native="logout">Logout</router-link></p>
           </template>
         </div>
       </template>
@@ -50,6 +50,10 @@ export default {
     },
     menuToggle(event) {
       this.menuShown = !this.menuShown
+    },
+    hideMenu(event) {
+      console.log('hello')
+      this.menuShown = false
     }
   }
 }
