@@ -1,10 +1,12 @@
 <template>
   <div>
-    <h4>login</h4>
-    <input type="text" v-model="email" placeholder="email" @input="reset" autofocus>
-    <input type="password" v-model="password" placeholder="password" @input="reset">
-    <button @click="sendLogin">Login</button>
-    <p>{{ message }}</p>
+    <h4 class="subtitle">login</h4>
+    <div class="entry-boxes">
+      <input type="text" v-model="email" placeholder="email" @input="reset" autofocus><br>
+      <input type="password" v-model="password" placeholder="password" @input="reset"><br>
+      <button @click="sendLogin">Login</button><br>
+      <p>{{ message }}</p>
+    </div>
   </div>
 </template>
 

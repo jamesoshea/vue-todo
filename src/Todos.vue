@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h4>home</h4>
-    <div class="entry">
-      <input type="text" v-model="newTitle" placeholder="Add a new todo" autofocus="true" class="entry-boxes">
-      <input type="text" v-model="newText" placeholder="Describe it" class="entry-boxes">
+    <h4 class="subtitle">todos</h4>
+    <div class="entry-boxes">
+      <input type="text" v-model="newTitle" placeholder="Add a new todo" autofocus="true" class="entry-boxes"><br>
+      <input type="text" v-model="newText" placeholder="Describe it" class="entry-boxes"><br>
       <button @click="addTodo" class="entry-boxes">Add</button>
     </div>
     <div class="todo" v-for="(todo, i) in todos">
@@ -67,10 +67,6 @@ p {
   margin-bottom: 1rem;
 }
 
-.entry {
-  margin-bottom: 3.5rem;
-}
-
 .entry-boxes {
   margin-bottom: 0rem;
 }
@@ -90,8 +86,6 @@ p {
 }
 
 .summary {
-  color: #42b983;
-  text-decoration: underline;
   text-align: justify;
 }
 

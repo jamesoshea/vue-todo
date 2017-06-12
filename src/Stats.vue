@@ -1,19 +1,15 @@
 <template>
   <div>
-    <h4>stats</h4>
-    <div class="row">
-      <div class="six columns">
-        <h1 class="num-total">{{ total }}</h1>
+    <h4 class="subtitle">stats</h4>
+    <div class="container">
+      <div class="col">
+        <h1 class="total">{{ total }}</h1>
         <h5 class="todos">{{ todoString }}, active for a total of {{ totalTime }}</h5>
       </div>
-      <div class="six columns">
-        <h1 class="comp-total">{{ compTotal }}</h1>
+      <div class="col">
+        <h1 class="total">{{ compTotal }}</h1>
         <h5 class="todos">todos completed</h5>
       </div>
-    </div>
-    <hr>
-    <div class="row">
-
     </div>
   </div>
 </template>
@@ -46,19 +42,12 @@
 
 <style scoped>
 
-.row {
-  width: 80%;
-  margin: auto;
-}
 
-.num-total {
+.total {
   font-size: 150px;
   margin-bottom: 0px;
-}
-
-.comp-total {
-  font-size: 150px;
-  margin-bottom: 0px;
+  margin-top: 0px;
+  text-align: center;
 }
 
 .todos {
