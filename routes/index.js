@@ -7,8 +7,13 @@ const jwt = require('jsonwebtoken')
 let router = express.Router()
 
 const User = require('../models/user')
-const secrets = require('../secrets.js')
-const secret = process.env.SECRET || secrets.secret
+
+if(!process.env.SECRET) {
+  const secrets = require('../secrets.js')
+  const secret = secrets.secret
+} else {
+  const secret = process.env.secret
+}
 
 //home route, sends app
 router.get('/', (req, res) => {

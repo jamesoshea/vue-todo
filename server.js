@@ -2,10 +2,15 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const mongoose = require('mongoose')
-const secrets = require('./secrets')
 
-const dbstring = process.env.DBSTRING || secrets.dbstring
-mongoose.connect(dbstring)
+if (process.env.DBSTRING === undefined) {
+  const secrets = require('./secrets.js')
+  mongoose.connect(secrets.dbstring)
+} else {
+  mongoose.connect(process.env.DBSTRING)
+}
+
+
 let app = express()
 
 app.use(express.static(__dirname + '/public'))
