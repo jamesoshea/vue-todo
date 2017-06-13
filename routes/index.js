@@ -86,11 +86,28 @@ router.post('/loginUser', (req, res) => {
 })
 
 router.post('/addTodo', (req, res) => {
-  jwt.verify(req.body.token, 'mememachine', (err, decoded) => {
-    User.findOneAndUpdate({_id: decoded.id}, { $set: { "todos": req.body.todos} }, (err, doc) => {
-      if (err) throw err
-      res.status(200).json({ message: 'todos updated.'})
-    })
+  jwt.verify(req.body.token, 'mememachine'/* secret */, (err, decoded) => {
+    if (err) {
+      res.status(400).json({ message: 'Please log in again.'})
+    } else {
+      User.findOneAndUpdate({_id: decoded.id}, { $set: { "todos": req.body.todos} }, (err, doc) => {
+        if (err) throw err
+        res.status(200).json({ message: 'todos updated.'})
+      })
+    }
+  })
+})
+
+router.post('/deleteTodo', (req, res) => {
+  jwt.verify(req.body.token, 'mememachine'/* secret */, (err, decoded) => {
+    if (err) {
+      res.status(400).json({ message: 'Please log in again.'})
+    } else {
+      User.findOneAndUpdate({_id: decoded.id}, { $set: { "todos": req.body.todos} }, (err, doc) => {
+        if (err) throw err
+        res.status(200).json({ message: 'todos updated.'})
+      })
+    }
   })
 })
 
@@ -106,7 +123,7 @@ router.post('/autoLogin', (req, res) => {
         } else {
           res.status(400).json({ message: 'User not found.'})
         }
-      })  
+      })
     }
   })
 })

@@ -27,6 +27,15 @@ export default {
   },
   deleteTodo(state, i) {
     state.todos.splice(i, 1)
+    if (state.userId) {
+      axios.post('/deleteTodo', {todos: state.todos, user: state.userId, token: localStorage.getItem('token')})
+        .then((res) => {
+          state.message = res.data.message
+        })
+        .catch((err) =>{
+          state.message = err.response.data.message
+        })
+    }
   },
   setUser(state, user) {
     if(user) {

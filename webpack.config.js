@@ -50,7 +50,8 @@ module.exports = {
       '/registerUser': 'http://localhost:3000',
       '/loginUser': 'http://localhost:3000',
       '/addTodo': 'http://localhost:3000',
-      '/autoLogin': 'http://localhost:3000'
+      '/autoLogin': 'http://localhost:3000',
+      '/deleteTodo': 'http://localhost:3000'
     }
   },
   performance: {
