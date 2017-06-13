@@ -12,7 +12,7 @@ if(process.env.SECRET === undefined) {
   const secrets = require('../secrets.js')
   var secret = secrets.secret
 } else {
-  var secret = process.env.secret
+  var secret = process.env.SECRET
 }
 
 //home route, sends app
