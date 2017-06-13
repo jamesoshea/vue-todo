@@ -63,8 +63,8 @@ router.post('/registerUser', (req, res) => {
 })
 
 router.post('/loginUser', (req, res) => {
-  let email = req.body.email
-  let password = req.body.password
+  let email = xssFilters.inHTMLData(req.body.email)
+  let password = xssFilters.inHTMLData(req.body.password)
   User.findOne({email: email}, (err, user) => {
     if (err) throw err
     if (!user) {
@@ -97,6 +97,10 @@ router.post('/addTodo', (req, res) => {
     if (err) {
       res.status(400).json({ message: 'Please log in again.'})
     } else {
+      req.body.todos.forEach((todo) => {
+        todo.title = xssFilters.inHTMLData(todo.title)
+        todo.text = xssFilters.inHTMLData(todo.text)
+      })
       User.findOneAndUpdate({_id: decoded.id}, { $set: { "todos": req.body.todos} }, (err, doc) => {
         if (err) throw err
         res.status(200).json({ message: 'todos updated.'})

@@ -5,6 +5,7 @@ export default {
   add(state, todo) {
     let now = new Date()
     let formattedTodo = { title: todo.newTitle, text: todo.newText, summary: todo.newText.slice(0, 50) + '...', date: moment.utc(new Date)}
+    if (todo.newTitle === '') formattedTodo.title = "Untitled Todo"
     state.todos.push(formattedTodo)
     if (state.userId) {
       axios.post('/addTodo', {todos: state.todos, user: state.userId, token: localStorage.getItem('token')})
