@@ -11,12 +11,10 @@
     </div>
     <div class="todo" v-for="(todo, i) in todos">
       <div class="container">
-        <div class="col">
-          <h5 class="title">{{ todo.title }}</h5>
-        </div>
+          <h5 class="col title">{{ todo.title }}</h5>
         <div class="col del">
-          <button @click="deleteTodo(i)">Delete</button>
           <button @click="completeTodo(i)">Completed</button>
+          <button @click="deleteTodo(i)">Delete</button>
         </div>
       </div>
       <p @click="showText(i)" class="summary">{{ todo.summary }} </p>
@@ -76,11 +74,16 @@ p {
 }
 
 .title {
-  text-align: left;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
   margin-bottom: 1rem;
+  margin-left: 0;
+  font-size: 20px;
 }
 
 .del {
+  margin-left: auto;
+  margin-right: 0;
   text-align: right;
 }
 
@@ -90,5 +93,6 @@ p {
 
 .time-submitted {
   text-align: left;
+  font-size: 10px;
 }
 </style>
