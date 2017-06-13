@@ -2,8 +2,10 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 const mongoose = require('mongoose')
+const secrets = require('./secrets')
 
-mongoose.connect('mongodb://james:DBtelecaster1@ds159371.mlab.com:59371/jim-todo')
+const dbstring = process.env.DBSTRING || secrets.dbstring
+mongoose.connect(dbstring)
 let app = express()
 
 app.use(express.static(__dirname + '/public'))
