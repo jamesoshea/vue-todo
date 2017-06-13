@@ -1,17 +1,18 @@
 <template>
   <div id="app">
     <div id="header">
-            <div class="container">
-              <h1 class="col"><i class="material-icons" @click="menuToggle">&#xE896;</i></h1>
-              <h1 class="col"><router-link to="/stats"><i class="material-icons" @click="hideMenu">&#xE8A6;</i></router-link></h1>
-              <h1 class="col" v-if="userId">hello, {{ name }}</h1>
-              <h1 class="col" v-else>fully sick todo app</h1>
+            <div class="col" id="switch">
+              <span @click="menuToggle">menu</span>
+            </div>
+            <div class="col container" id="toplinks">
+              <h1 v-if="userId"><router-link to="/">{{ name }}&nbsp;</router-link></h1>
+              <h1><router-link to="/stats">{{ total }}</router-link></h1>
             </div>
     </div>
     <transition name="fade">
       <template v-if="menuShown">
         <div id="menu">
-          <p @click="hideMenu"><router-link to="/">Todos</router-link></p>
+          <p @click="hideMenu"><router-link to="/"><strong>{{ total }}</strong> todos</router-link></p>
           <p @click="hideMenu"><router-link to="/stats">Stats</router-link></p>
           <template v-if="userId == undefined">
             <p @click="hideMenu"><router-link to="/register">Register</router-link></p>
@@ -42,6 +43,9 @@ export default {
     },
     name() {
       return this.$store.getters.name
+    },
+    total() {
+      return this.$store.getters.total
     }
   },
   methods: {
@@ -74,16 +78,42 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   line-height: 1.2;
-  padding: 10vw 2em;
+  padding: 0 2em;
   text-align: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
 }
 
 #header a, #header a:active, #header a:visited, #header a:hover, #header h1 {
   color: #fff;
 }
 
+#switch {
+  color: #fff;
+  padding-top: 2vw;
+  text-align: left;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+
+}
+
+#toplinks {
+  padding: 10vw 0;
+  margin-left: auto;
+}
+
 #menu {
   padding-left: 5%;
+}
+
+#todos-link-container {
+  justify-content: flex-start;
 }
 
 

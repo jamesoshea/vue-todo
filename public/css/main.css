@@ -42,13 +42,15 @@ button {
   display: flex;
   -webkit-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
+  text-align: center;
 }
 
 .col {
+  width: auto;
   margin: auto;
 }
 

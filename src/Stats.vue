@@ -2,11 +2,11 @@
   <div>
     <h4 class="subtitle">stats</h4>
     <div class="container">
-      <div class="col">
+      <div class="col stat">
         <h1 class="total">{{ total }}</h1>
         <h5 class="todos">{{ todoString }}, active for a total of {{ totalTime }}</h5>
       </div>
-      <div class="col">
+      <div class="col stat">
         <h1 class="total">{{ compTotal }}</h1>
         <h5 class="todos">todos completed</h5>
       </div>
@@ -53,5 +53,9 @@
 .todos {
   text-align: center;
 }
+
+/*.stat {
+  width: 100vw;
+}*/
 
 </style>
