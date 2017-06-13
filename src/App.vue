@@ -56,7 +56,6 @@ export default {
       this.menuShown = !this.menuShown
     },
     hideMenu(event) {
-      console.log('hello')
       this.menuShown = false
     }
   }

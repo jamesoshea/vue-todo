@@ -96,15 +96,18 @@ router.post('/addTodo', (req, res) => {
 
 router.post('/autoLogin', (req, res) => {
   jwt.verify(req.body.token, 'mememachine', (err, decoded) => {
-    if (err) throw error
-    User.findOne({_id: decoded.id}, (err, user) => {
-      if (err) throw err
-      if (user) {
-        res.status(200).json({ userData : { id: user._id, todos: user.todos, completed: user.completed, name: user.name}})
-      } else {
-        res.status(400).json({ message: 'User not found.'})
-      }
-    })
+    if (err) {
+      res.status(400).json({ message: 'Please log in again.'})
+    } else {
+      User.findOne({_id: decoded.id}, (err, user) => {
+        if (err) throw err
+        if (user) {
+          res.status(200).json({ userData : { id: user._id, todos: user.todos, completed: user.completed, name: user.name}})
+        } else {
+          res.status(400).json({ message: 'User not found.'})
+        }
+      })  
+    }
   })
 })
 
