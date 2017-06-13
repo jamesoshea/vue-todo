@@ -8,11 +8,11 @@ let router = express.Router()
 
 const User = require('../models/user')
 
-if(!process.env.SECRET) {
+if(process.env.SECRET === undefined) {
   const secrets = require('../secrets.js')
-  const secret = secrets.secret
+  var secret = secrets.secret
 } else {
-  const secret = process.env.secret
+  var secret = process.env.secret
 }
 
 //home route, sends app
@@ -73,7 +73,7 @@ router.post('/loginUser', (req, res) => {
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if(err) throw err
         if (isMatch) {
-          let token = jwt.sign({id: user._id}, 'mememachine', { expiresIn: '1h' })
+          let token = jwt.sign({id: user._id}, secret, { expiresIn: '1h' })
           res.status(200).json({
             message: 'login successful',
             token: token,
@@ -93,7 +93,7 @@ router.post('/loginUser', (req, res) => {
 })
 
 router.post('/addTodo', (req, res) => {
-  jwt.verify(req.body.token, 'mememachine'/* secret */, (err, decoded) => {
+  jwt.verify(req.body.token, secret/* secret */, (err, decoded) => {
     if (err) {
       res.status(400).json({ message: 'Please log in again.'})
     } else {
@@ -106,7 +106,7 @@ router.post('/addTodo', (req, res) => {
 })
 
 router.post('/deleteTodo', (req, res) => {
-  jwt.verify(req.body.token, 'mememachine'/* secret */, (err, decoded) => {
+  jwt.verify(req.body.token, secret/* secret */, (err, decoded) => {
     if (err) {
       res.status(400).json({ message: 'Please log in again.'})
     } else {
@@ -119,7 +119,7 @@ router.post('/deleteTodo', (req, res) => {
 })
 
 router.post('/autoLogin', (req, res) => {
-  jwt.verify(req.body.token, 'mememachine', (err, decoded) => {
+  jwt.verify(req.body.token, secret, (err, decoded) => {
     if (err) {
       res.status(400).json({ message: 'Please log in again.'})
     } else {
