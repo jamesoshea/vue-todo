@@ -61,7 +61,6 @@ export default {
     state.message = message
   },
   menuToggle(state) {
-    console.log(state.shown)
     state.shown = !state.shown
   }
 }
