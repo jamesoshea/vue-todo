@@ -44,6 +44,7 @@ export default {
       state.todos = user.todos
       state.completed = user.completed
       state.name = user.name
+      state.shown = true
     } else {
       state.userId = undefined
     }
@@ -58,5 +59,9 @@ export default {
   },
   setMessage(state, message) {
     state.message = message
+  },
+  menuToggle(state) {
+    console.log(state.shown)
+    state.shown = !state.shown
   }
 }

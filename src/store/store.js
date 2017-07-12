@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
         todos: [],
         completed: 0,
         message: '',
-        name: ''
+        name: '',
+        shown: false
     },
     getters,
     mutations

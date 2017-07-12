@@ -1,29 +1,27 @@
 <template>
   <div id="app">
     <div id="header">
-            <div class="col" id="switch">
-              <span @click="menuToggle">menu</span>
-            </div>
-            <div class="col container" id="toplinks">
-              <h1 v-if="userId"><router-link to="/">{{ name }}&nbsp;</router-link></h1>
-              <h1><router-link to="/stats">{{ total }}</router-link></h1>
-            </div>
-    </div>
-    <transition name="fade">
       <template v-if="menuShown">
-        <div id="menu">
-          <p @click="hideMenu"><router-link to="/"><strong>{{ total }}</strong> todos</router-link></p>
-          <p @click="hideMenu"><router-link to="/stats">Stats</router-link></p>
-          <template v-if="userId == undefined">
-            <p @click="hideMenu"><router-link to="/register">Register</router-link></p>
-            <p @click="hideMenu"><router-link to="/login">Login </router-link></p>
-          </template>
-          <template v-else>
-            <p @click="hideMenu"><router-link to="/login" @click.native="logout">Logout</router-link></p>
-          </template>
-        </div>
+          <div id="menu">
+            <p @click="hideMenu"><router-link to="/"><strong>{{ total }}</strong> todos</router-link></p>
+            <p @click="hideMenu"><router-link to="/stats">Stats</router-link></p>
+            <template v-if="userId == undefined">
+              <p @click="hideMenu"><router-link to="/register">Register</router-link></p>
+              <p @click="hideMenu"><router-link to="/login">Login </router-link></p>
+            </template>
+            <template v-else>
+              <p @click="hideMenu"><router-link to="/login" @click.native="logout">Logout</router-link></p>
+            </template>
+          </div>
       </template>
-    </transition>
+      <div v-else class="col" id="switch">
+        <span @click="menuToggle">menu</span>
+      </div>
+      <div class="col container" id="toplinks">
+        <h1 v-if="userId"><router-link to="/">{{ name }} |&nbsp;</router-link></h1>
+        <h1><router-link to="/stats">{{ total }}</router-link></h1>
+      </div>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -34,10 +32,12 @@ export default {
   name: 'app',
   data() {
     return {
-      menuShown: false
     }
   },
   computed: {
+    menuShown() {
+      return this.$store.getters.shown
+    },
     userId() {
       return this.$store.getters.userId
     },
@@ -53,7 +53,7 @@ export default {
       this.$store.commit('logout')
     },
     menuToggle(event) {
-      this.menuShown = !this.menuShown
+      this.$store.commit('menuToggle')
     },
     hideMenu(event) {
       this.menuShown = false
@@ -62,7 +62,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
@@ -87,6 +87,7 @@ export default {
   justify-content: center;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
+  height: 200px;
 }
 
 #header a, #header a:active, #header a:visited, #header a:hover, #header h1 {
@@ -96,24 +97,22 @@ export default {
 #switch {
   color: #fff;
   padding-top: 2vw;
-  text-align: left;
   -webkit-align-self: flex-start;
   align-self: flex-start;
+  text-align: center;
 
 }
 
 #toplinks {
-  padding: 10vw 0;
   margin-left: auto;
+  text-align: center;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
 }
 
 #menu {
-  padding-left: 5%;
+  text-align: center;
+  min-width: 50%;
 }
-
-#todos-link-container {
-  justify-content: flex-start;
-}
-
 
 </style>

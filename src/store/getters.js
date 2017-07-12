@@ -27,6 +27,9 @@ export default {
   },
   name(state) {
     return state.name
+  },
+  shown(state) {
+    return state.shown
   }
 }
 
